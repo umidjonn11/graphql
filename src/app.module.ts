@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { TodoModule } from './todo/todo.module';
+import { UserRepository } from './user/entities/user.entity';
+import { Todo } from './todo/entities/todo.entity';
 
 @Module({
   imports: [
@@ -11,17 +11,17 @@ import { TodoModule } from './todo/todo.module';
     TodoModule,
     TypeOrmModule.forRoot({
       host: 'localhost',
-      username: 'postgress',
+      username: 'postgres',
       port: 5432,
       database: 'RestApi',
       password: 'umidjon06',
       type: 'postgres',
       synchronize: true,
-      entities: [],
+      entities: [UserRepository,Todo],
       autoLoadEntities: true,
     }),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

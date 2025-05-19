@@ -1,6 +1,7 @@
 import { UserRole } from 'src/security/roles.enum';
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BeforeInsert, Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import {hash} from "bcrypt"
+import { Todo } from 'src/todo/entities/todo.entity';
 @Entity({ name: 'users' })
 export class UserRepository {
   @PrimaryGeneratedColumn()
@@ -19,6 +20,8 @@ export class UserRepository {
   refreshToken:string
   @Column({ default: true })
   isActive: boolean;
+  @OneToMany(() => Todo, (todo) => todo.user)
+  todos: Todo[];
 
 
   @BeforeInsert()

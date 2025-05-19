@@ -42,9 +42,9 @@ export class UserService {
 
     return { user, token, refreshToken };
   }
-  async create(data: any) {
-    const user = await this.userRepo.create(data);
-    return user;
+  async create(data:CreateUserDto) {
+    const user =  this.userRepo.create(data);
+    return await this.userRepo.save(user);
   }
   async validateUser(username: string, password: string) {
     const user = await this.userRepo.findOne({

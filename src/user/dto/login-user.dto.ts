@@ -8,5 +8,6 @@ export class LoginDto {
   username: string;
   @ApiProperty({ default: 'NIaM.1234' })
   @IsString()
+  @IsOptional()
   password: string;
 }
