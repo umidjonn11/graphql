@@ -1,0 +1,44 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Todo {
+  """"""
+  id: Int!
+
+  """"""
+  title: String!
+  completed: Boolean!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  todos: [Todo!]!
+  todo(id: Int!): Todo!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  updateTodo(updateTodoInput: UpdateTodoInput!): Todo!
+  removeTodo(id: Int!): Todo!
+}
+
+input CreateTodoInput {
+  """Example field (placeholder)"""
+  title: String!
+  completed: Boolean!
+  createdAt: DateTime!
+}
+
+input UpdateTodoInput {
+  """Example field (placeholder)"""
+  title: String
+  completed: Boolean
+  createdAt: DateTime
+  id: Int!
+}
