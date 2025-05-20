@@ -9,22 +9,34 @@ import { todo } from 'node:test';
 
 @Injectable()
 export class TodoService {
-  constructor(@InjectRepository(TodoModel) private todoRepo:Repository<TodoModel>){}
+  constructor(
+    @InjectRepository(TodoModel) private todoRepo: Repository<TodoModel>,
+  ) {}
   async create(data: CreateTodoInput) {
-    const todo= this.todoRepo.create(data);
-    await this.todoRepo.save(todo)
+    let todo = this.todoRepo.create(data);
+    todo = await this.todoRepo.save(todo);
+    return todo;
   }
 
   findAll() {
-    return `This action returns all todo`;
+    return this.todoRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} todo`;
+  findOne(id: any) {
+    let todo = this.todoRepo.findOne({ where: { id } });
+    return todo;
   }
 
-  update(id: number, updateTodoInput: UpdateTodoInput) {
-    return `This action updates a #${id} todo`;
+  async update(id: number, updateTodoInput: UpdateTodoInput) {
+    const todo = await this.todoRepo.findOne({ where: { id } }); // ✅ await here
+
+    if (!todo) {
+      throw new Error(`Todo with ID ${id} not found`);
+    }
+
+    Object.assign(todo, updateTodoInput);
+    await this.todoRepo.save(todo);
+    return todo;
   }
 
   remove(id: number) {

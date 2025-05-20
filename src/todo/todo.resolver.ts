@@ -24,8 +24,11 @@ export class TodoResolver {
   }
 
   @Mutation(() => Todo)
-  updateTodo(@Args('updateTodoInput') updateTodoInput: UpdateTodoInput) {
-    return this.todoService.update(updateTodoInput.id, updateTodoInput);
+  updateTodo(
+    @Args('updateTodoInput') updateTodoInput: UpdateTodoInput,
+    @Args('id') id: number,
+  ) {
+    return this.todoService.update(id, updateTodoInput);
   }
 
   @Mutation(() => Todo)

@@ -4,10 +4,10 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export class TodoModel {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column({nullable:false})
+  @Column({ nullable: false })
   title: string;
-  @Column({nullable:false})
+  @Column({ nullable: false })
   completed: boolean;
-  @Column({nullable:false})
+  @Column()
   createdAt: Date;
 }
